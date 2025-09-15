@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sculpts</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* Navbar */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #0a0a0a;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid #222;
+    }
+
+    .nav-logo {
+      color: #0ff;
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    .nav-links a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: #0ff;
+    }
+
+    .cta-btn.small {
+      padding: 0.5rem 1rem;
+      background-color: #0ff;
+      color: #000;
+      border-radius: 4px;
+      font-weight: bold;
+    }
+
+    .cta-btn.small:hover {
+      background-color: #00cccc;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 100vh;
+      background-color: #111;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      text-align: center;
+      padding: 2rem;
+    }
+
+    .rotating-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+
+    .circle {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      position: absolute;
+      opacity: 0.1;
+    }
+
+    .ae {
+      background-color: #00f;
+      top: 10%;
+      left: 10%;
+    }
+
+    .davinci {
+      background-color: #f00;
+      bottom: 10%;
+      right: 10%;
+    }
+
+    .overlay {
+      z-index: 1;
+      position: relative;
+    }
+
+    .neon-box .title {
+      font-size: 2.5rem;
+      color: #0ff;
+      margin-bottom: 1rem;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .cta-btn {
+      padding: 0.75rem 1.5rem;
+      background-color: #0ff;
+      color: #000;
+      font-weight: bold;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .cta-btn:hover {
+      background-color: #00cccc;
+    }
+
+    .neon-line {
+      height: 3px;
+      background: #0ff;
+      width: 100%;
+    }
+
+    /* About Section */
+    .about {
+      padding: 4rem 2rem;
+      text-align: center;
+      background-color: #080808;
+    }
+
+    .about h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: #0ff;
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .about ul {
+      list-style: none;
+      margin-top: 2rem;
+    }
+
+    .about li {
+      margin: 0.5rem 0;
+    }
+
+    /* Pricing Section */
+    .pricing {
+      padding: 4rem 2rem;
+      background: #0a0a0a;
+      color: #fff;
+      text-align: center;
+    }
+
+    .pricing h2 {
+      font-size: 2.5rem;
+      margin-bottom: 2rem;
+      color: #0ff;
+    }
+
+    .pricing-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 2rem;
+      width: 300px;
+      transition: transform 0.3s ease, width 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+    }
+
+    .card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: #0ff;
+    }
+
+    .card .price {
+      font-size: 2rem;
+      color: #fff;
+      margin: 1rem 0;
+    }
+
+    .card ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+
+    .card ul li {
+      margin: 0.5rem 0;
+    }
+
+    .card .cta-btn {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #0ff;
+      color: #000;
+      font-weight: bold;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .card .cta-btn:hover {
+      background-color: #00cccc;
+    }
+
+    @media (max-width: 1024px) {
+      .card {
+        width: 45%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pricing-cards {
+        flex-direction: column;
+        align-items: center;
+      }
+      .card {
+        width: 100%;
+      }
+      .nav-links {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+
+    footer {
+      padding: 2rem;
+      text-align: center;
+      background: #000;
+      color: #888;
+    }
+
+    /* Scroll animation class */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .in-view {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-logo">Sculpts</div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn small">Get Started</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <div class="rotating-bg">
+      <div class="rotating-bg">
+  <div class="floating-circle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
+  <div class="floating-circle" style="top: 40%; left: 25%; animation-delay: 2s;"></div>
+
+</div>
+
+      <div class="circle ae"></div>
+      <div class="circle davinci"></div>
+    </div>
+    <div class="overlay">
+      <div class="neon-box">
+        <h1 class="title animate-on-scroll">“Your Vision, Sculpted to Perfection.”</h1>
+      </div>
+      <p class="subtitle">Professional Edits with After Effects &amp; DaVinci Resolve</p>
+      <a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn">COMING SOON</a>
+    </div>
+  </div>
+
+
+  <!-- About Section -->
+  <section id="about" class="about">
+    <h2 class="animate-on-scroll">About Us</h2>
+    <p class="animate-on-scroll">
+      We don’t just edit videos — we sculpt stories.
+At Sculpts, we fuse motion design, cinematic color grading, and sound to craft visuals that breathe. Whether it’s a 15-second promo or a full-blown brand animation, we bring your vision to life with creative precision using After Effects and DaVinci Resolve.
+    </p>
+    <ul>
+      <li class="animate-on-scroll">Promo Videos</li>
+      <li class="animate-on-scroll">Logo Animations</li>
+      <li class="animate-on-scroll">Color Grading</li>
+      <li class="animate-on-scroll">Motion Graphics</li>
+    </ul>
+  </section>
+
+  <!-- Pricing Section -->
+  <section id="pricing" class="pricing">
+    <h2 class="animate-on-scroll">Pricing</h2>
+    <div class="pricing-cards">
+      <!-- Basic Plan -->
+      <div class="card animate-on-scroll">
+        <h3>Basic</h3>
+        <p class="price">$2</p>
+        <ul>
+          <li>1 Promo Video [15 Seconds]</li>
+          <li>Basic Color Grading</li>
+          <li>Simple Logo Animation</li>
+          <li>NO Dedicated Revisions</li>
+        </ul>
+        <a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn">COMING SOON</a>
+      </div>
+
+      <!-- Standard Plan -->
+      <div class="card animate-on-scroll">
+        <h3>Standard</h3>
+        <p class="price">$20</p>
+        <ul>
+          <li>3 Promo Videos [20 Seconds]</li>
+          <li>Advanced Color Grading</li>
+          <li>Custom Logo Animation</li>
+          <li>1 Dedicated Revision</li>
+        </ul>
+        <a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn">COMING SOON</a>
+      </div>
+
+      <!-- Premium Plan -->
+      <div class="card animate-on-scroll">
+        <h3>Premium</h3>
+        <p class="price">$30</p>
+        <ul>
+          <li>5 Promo Videos [60 Seconds]</li>
+          <li>Cinematic Color Grading</li>
+          <li>Premium Motion Graphics</li>
+          <li>3 Dedicated Revisions</li>
+        </ul>
+        <a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn">COMING SOON</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Sculpts — All Rights Reserved
+  </footer>
+
+  <!-- Scroll Animation Script -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("in-view");
+            observer.unobserve(entry.target); // animate once
+          }
+        });
+      }, { threshold: 0.2 });
+
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+    });
+   
+  // Prevent scroll position restoration on refresh
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+
+  // Scroll animation logic
+  document.addEventListener("DOMContentLoaded", () => {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("in-view");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    document.querySelectorAll('.animate-on-scroll').forEach(el => {
+      observer.observe(el);
+    });
+  });
+ 
+  window.onload = function() {
+    window.scrollTo(0, 0);
+  };
+
+  window.onload = function() {
+    if (window.location.hash) {
+      // Remove the hash without adding a new history entry
+      history.replaceState(null, null, window.location.pathname + window.location.search);
+    }
+    // Scroll to top after removing hash
+    window.scrollTo(0, 0);
+  };
+
+ 
+    if (window.location.hash) {
+      history.replaceState(null, null, window.location.pathname + window.location.search);
+      window.scrollTo(0, 0);
+    }
+  </script>
+  <!-- Your existing navbar, hero, about, etc. -->
+
+
+
+
+
+    
+  </script>
+
+</body>
+</html>
+
