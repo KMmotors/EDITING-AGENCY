@@ -5,15 +5,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  
 }
 
-body {
-  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
-  color: #fff;
-  background-color: #000;
-  line-height: 1.5;
-  scroll-behavior: smooth;
-}
+
 
 /* Smooth fade-in animation */
 @keyframes fadeInUp {
@@ -450,5 +445,77 @@ box-shadow: 0 0 10px #fff,
   100% {
     transform: translateY(0) scale(1);
     opacity: 1;
+  }
+}
+.pricing-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* ensures equal center alignment */
+  gap: 2rem; /* space between cards */
+}
+
+.card {
+  flex: 1 1 300px; /* automatically size but not less than 300px */
+  max-width: 300px; /* consistent width */
+}
+.card {
+  position: relative; /* Needed for absolute SVG inside */
+  overflow: hidden;
+}
+
+.card-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  stroke-dasharray: 1200; /* total path length of rect */
+  stroke-dashoffset: 1200;
+  animation: draw 4s linear infinite;
+  pointer-events: none; /* don’t block clicks */
+}
+
+@keyframes draw {
+  0% {
+    stroke-dashoffset: 1200;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -1200;
+  }
+}
+
+/* Stats Section */
+.stats {
+  padding: 4rem 2rem;
+  background-color: #080808;
+  color: #0ff;
+  text-align: center;
+}
+
+.stats-container {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.stat h3 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #ff6600;
+}
+
+.stat p {
+  font-size: 1.1rem;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .stats-container {
+    flex-direction: column;
+    gap: 2rem;
   }
 }
