@@ -18,9 +18,9 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: Tahoma, sans-serif;
       background-color: #000;
-      color: #fff;
+      color:#ff6600;
     }
 
     /* Navbar */
@@ -35,6 +35,7 @@
       z-index: 1000;
       border-bottom: 1px solid #222;
     }
+  
 
     .nav-logo {
       color: #0ff;
@@ -126,8 +127,10 @@
     }
 
     .subtitle {
-      font-size: 1.2rem;
+      font-size: 50px;
       margin-bottom: 2rem;
+
+      
     }
 
     .cta-btn {
@@ -211,6 +214,17 @@
     .card:hover {
       transform: translateY(-10px);
     }
+    /* Glassmorphism style for all cards */
+.card, .review-card {
+  background: rgba(255, 255, 255, 0.1); /* semi transparent layer */
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);           /* blur whatever is behind */
+  -webkit-backdrop-filter: blur(10px);   /* Safari support */
+  box-shadow: 0 8px 32px 0 rgba(0,0,0,0.3);
+  color: #fff;                          /* text visible on dark background */
+}
+
 
     .card h3 {
       font-size: 1.8rem;
@@ -287,6 +301,114 @@
       opacity: 1;
       transform: none;
     }
+    .nav-logo img:hover {
+  opacity: 0.8; /* subtle fade */
+  transform: scale(1.05);
+  transition: all 0.3s ease;
+}
+.nav-logo img {
+  height: auto;        /* adjust as needed */
+  width: auto;         /* keep proportions */
+  display: block;
+}
+.card {
+  flex: 1 1 300px; /* grow/shrink automatically */
+  max-width: 300px;
+}
+@media (max-width: 768px) {
+  .hero {
+    padding: 1rem;
+  }
+  .neon-box .title {
+    font-size: 1.8rem; /* shrink title */
+  }
+  .subtitle {
+    font-size: 1rem;
+  }
+  .cta-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .nav-links a {
+    font-size: 1rem;
+  }
+}
+.nav-logo img {
+  max-height: 80px;   /* large screens */
+  width: auto;
+  display: block;
+  border-radius: 50%;
+}
+
+@media (max-width: 768px) {
+  .nav-logo img {
+    max-height: 50px; /* smaller logo on mobile */
+  }
+}
+/* ✅ Universal responsive tweaks */
+img, video {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Responsive cards (pricing & future reviews) */
+.pricing-cards,
+.reviews-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.card, .review-card {
+  flex: 1 1 300px;      /* automatically grows/shrinks */
+  max-width: 300px;     /* don’t stretch too wide */
+  width: 100%;          /* full width on small screens */
+}
+
+/* Fluid typography */
+h1.title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+}
+.subtitle {
+  font-size: clamp(1rem, 3vw, 2rem);
+}
+
+/* Navbar responsive */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: center;
+  }
+  .nav-links {
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  .nav-links a {
+    font-size: 1rem;
+  }
+}
+
+/* About section padding */
+.about, .pricing, .reviews {
+  padding: 3rem 1rem;
+}
+
+
+
+
   </style>
 </head>
 
@@ -294,23 +416,27 @@
 
   <!-- Navbar -->
   <nav class="navbar">
-    <div class="nav-logo">Sculpts</div>
+    <a href="#" class="nav-logo">
+  <img src="images/logo_2.png" alt="Sculpts Logo">
+</a>
+
     <ul class="nav-links">
       <li><a href="#about">About</a></li>
       <li><a href="#pricing">Pricing</a></li>
-      <li><a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn small">Get Started</a></li>
+      <li><a href="https://docs.google.com/forms/d/e/1FAIpQLScDguDYfPyHbW16n-2hP1R3eWGnea-nGNPOVPa6FrLIcv2SXQ/viewform?usp=header" class="cta-btn small">BOOK</a></li>
     </ul>
   </nav>
 
   <!-- Hero Section -->
   <div class="hero">
-    <div class="rotating-bg">
+  
+    <div class="rotating-bg" style="color:#ff6600">
       <div class="rotating-bg">
   <div class="floating-circle" style="top: 20%; left: 10%; animation-delay: 0s;"></div>
   <div class="floating-circle" style="top: 40%; left: 25%; animation-delay: 2s;"></div>
 
 </div>
-
+  
       <div class="circle ae"></div>
       <div class="circle davinci"></div>
     </div>
@@ -319,13 +445,14 @@
         <h1 class="title animate-on-scroll">“Your Vision, Sculpted to Perfection.”</h1>
       </div>
       <p class="subtitle">Professional Edits with After Effects &amp; DaVinci Resolve</p>
-      <a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn">COMING SOON</a>
+    
     </div>
   </div>
 
 
   <!-- About Section -->
   <section id="about" class="about">
+
     <h2 class="animate-on-scroll">About Us</h2>
     <p class="animate-on-scroll">
       We don’t just edit videos — we sculpt stories.
@@ -336,57 +463,84 @@ At Sculpts, we fuse motion design, cinematic color grading, and sound to craft v
       <li class="animate-on-scroll">Logo Animations</li>
       <li class="animate-on-scroll">Color Grading</li>
       <li class="animate-on-scroll">Motion Graphics</li>
+      <li class="animate-on-scroll">Youtube Shorts</li>
+      <li class="animate-on-scroll">Instagram Reels</li>
     </ul>
   </section>
 
   <!-- Pricing Section -->
   <section id="pricing" class="pricing">
+    
     <h2 class="animate-on-scroll">Pricing</h2>
     <div class="pricing-cards">
       <!-- Basic Plan -->
       <div class="card animate-on-scroll">
+        <!-- <svg class="card-border" width="100%" height="100%" viewBox="0 0 300 300" preserveAspectRatio="none">
+    <rect x="0" y="0" width="300" height="300" fill="none" stroke="#A747F5" stroke-width="5" /> -->
+ 
         <h3>Basic</h3>
-        <p class="price">$10</p>
+        <p class="price">&#8377 800</p>
         <ul>
           <li>1 Promo Video [15 Seconds]</li>
           <li>Basic Color Grading</li>
           <li>Simple Logo Animation</li>
           <li>NO Dedicated Revisions</li>
         </ul>
-        <a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn">COMING SOON</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScDguDYfPyHbW16n-2hP1R3eWGnea-nGNPOVPa6FrLIcv2SXQ/viewform?usp=header" class="cta-btn">BOOK NOW</a>
       </div>
 
       <!-- Standard Plan -->
       <div class="card animate-on-scroll">
         <h3>Standard</h3>
-        <p class="price">$20</p>
+        <p class="price">&#8377 1600</p>
         <ul>
-          <li>3 Promo Videos [20 Seconds]</li>
+          <li>2 Promo Videos [20 Seconds]</li>
           <li>Advanced Color Grading</li>
           <li>Custom Logo Animation</li>
           <li>1 Dedicated Revision</li>
         </ul>
-        <a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn">COMING SOON</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScDguDYfPyHbW16n-2hP1R3eWGnea-nGNPOVPa6FrLIcv2SXQ/viewform?usp=header" class="cta-btn">BOOK NOW</a>
       </div>
 
       <!-- Premium Plan -->
       <div class="card animate-on-scroll">
         <h3>Premium</h3>
-        <p class="price">$30</p>
+        <p class="price">&#8377 2400</p>
         <ul>
-          <li>5 Promo Videos [60 Seconds]</li>
+          <li>3 Promo Videos [60 Seconds]</li>
           <li>Cinematic Color Grading</li>
           <li>Premium Motion Graphics</li>
           <li>3 Dedicated Revisions</li>
         </ul>
-        <a href="https://forms.gle/YOUR_GOOGLE_FORM" class="cta-btn">COMING SOON</a>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLScDguDYfPyHbW16n-2hP1R3eWGnea-nGNPOVPa6FrLIcv2SXQ/viewform?usp=header" class="cta-btn">BOOK NOW</a>
       </div>
+
+
+
+      
     </div>
   </section>
+  <!-- Stats Section -->
+<section class="stats">
+  <div class="stats-container">
+    <div class="stat">
+      <h3 class="count" data-target="0">0</h3>
+      <p>Clients</p>
+    </div>
+    <div class="stat">
+      <h3 class="count" data-target="0">0</h3>
+      <p>Projects</p>
+    </div>
+  </div>
+</section>
 
-  <footer>
-    &copy; 2025 Sculpts — All Rights Reserved
-  </footer>
+<footer style="padding:2rem; text-align:center; background:#000; color:#888;">
+  &copy; 2025 Sculpts — All Rights Reserved 
+  <a href="terms&services.html" style="color:#ff6600; text-decoration:none;"> |Terms of Service |</a>
+   <a href="privacy.html" style="color:#ff6600; text-decoration:none;">Privacy Policy |</a>
+   <a href="refund.html" style="color:#ff6600; text-decoration:none;">Refund Policy </a>
+</footer>
+
 
   <!-- Scroll Animation Script -->
   <script>
@@ -444,6 +598,37 @@ At Sculpts, we fuse motion design, cinematic color grading, and sound to craft v
       history.replaceState(null, null, window.location.pathname + window.location.search);
       window.scrollTo(0, 0);
     }
+    // Counter Animation
+const counters = document.querySelectorAll('.count');
+const speed = 200; // lower = faster
+
+counters.forEach(counter => {
+  const updateCount = () => {
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+
+    const increment = target / speed;
+
+    if (count < target) {
+      counter.innerText = Math.ceil(count + increment);
+      setTimeout(updateCount, 10);
+    } else {
+      counter.innerText = target;
+    }
+  };
+
+  // start counting when section in view
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        updateCount();
+        observer.unobserve(counter);
+      }
+    });
+  });
+  observer.observe(counter);
+});
+
   </script>
   <!-- Your existing navbar, hero, about, etc. -->
 
@@ -456,5 +641,4 @@ At Sculpts, we fuse motion design, cinematic color grading, and sound to craft v
 
 </body>
 </html>
-
 
